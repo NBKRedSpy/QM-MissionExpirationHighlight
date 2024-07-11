@@ -1,0 +1,7 @@
+{
+    "UniqueModName": "QM_MissionExpirationHighlight",
+    "Assemblies": [
+        "QM_MissionExpirationHighlight.dll"
+    ],
+    "Dependencies": []
+}

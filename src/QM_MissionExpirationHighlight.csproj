@@ -1,0 +1,45 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net48</TargetFramework>
+    <OutputType>Library</OutputType>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="BepInEx.AssemblyPublicizer.msbuild" Version="0.4.2">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
+    <PackageReference Include="System.Data.DataSetExtensions" Version="4.5.0" />
+    <PackageReference Include="yamldotnet" Version="15.3.0" />
+    <Reference Include="0Harmony">
+      <HintPath>D:\Games\Steam\steamapps\common\Quasimorph\BepInEx\core\0Harmony.dll</HintPath>
+    </Reference>
+
+	  <Reference Include="Assembly-CSharp" publicize="true">
+		  <HintPath>D:\Games\Steam\steamapps\common\Quasimorph\Quasimorph_Data\Managed\Assembly-CSharp.dll</HintPath>
+	  </Reference>
+	  <Reference Include="Unity.TextMeshPro">
+		  <HintPath>D:\Games\Steam\steamapps\common\Quasimorph\Quasimorph_Data\Managed\Unity.TextMeshPro.dll</HintPath>
+	  </Reference>
+
+	  <Reference Include="UnityEngine.InputLegacyModule, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+		  <SpecificVersion>False</SpecificVersion>
+		  <HintPath>D:\Games\Steam\steamapps\common\Quasimorph\Quasimorph_Data\Managed\UnityEngine.InputLegacyModule.dll</HintPath>
+	  </Reference>
+	  <Reference Include="UnityEngine, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+		  <SpecificVersion>False</SpecificVersion>
+		  <HintPath>D:\Games\Steam\steamapps\common\Quasimorph\Quasimorph_Data\Managed\UnityEngine.dll</HintPath>
+	  </Reference>
+	  <Reference Include="UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+		  <SpecificVersion>False</SpecificVersion>
+		  <HintPath>D:\Games\Steam\steamapps\common\Quasimorph\Quasimorph_Data\Managed\UnityEngine.CoreModule.dll</HintPath>
+	  </Reference>
+
+  </ItemGroup>
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+    <Exec Command="set targetDir=D:\Games\Steam\steamapps\workshop\content\2059170\3286658972\&#xD;&#xA;&#xD;&#xA;xcopy /y $(TargetDir)$(TargetName).* %25targetDir%25&#xD;&#xA;xcopy /y $(TargetDir)YamlDotNet.dll %25targetDir%25&#xD;&#xA;xcopy /y $(TargetDir)0Harmony.dll %25targetDir%25&#xD;&#xA;&#xD;&#xA;" />
+  </Target>
+	
+	
+</Project>
