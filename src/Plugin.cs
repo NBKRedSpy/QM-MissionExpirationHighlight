@@ -23,6 +23,8 @@ namespace QM_MissionExpirationHighlight
             LoadConfig();
             ModConfig.Init();
 
+            StationsRenderer.ColorConfig = ModConfig.UnityColorConfig;
+
             new Harmony("QM_MissionExpirationHighlight").PatchAll();
         }
 
@@ -33,28 +35,43 @@ namespace QM_MissionExpirationHighlight
 
             if (File.Exists(configPath))
             {
-                var deseralizer = new DeserializerBuilder()
-                    .Build();
+                var deseralizer = new Deserializer();
 
                 try
                 {
                     ModConfig = deseralizer.Deserialize<ModConfig>(File.ReadAllText(configPath));
-                    return;
+
+                    if (ModConfig.Version == ModConfig.LatestVerison)
+                    {
+                        return;
+                    }
+                    else
+                    {
+                        //Backup the old version, but create a new one.
+                        File.Copy(configPath, configPath + ".bak");
+
+                        //Fall through to the create.
+                    }
                 }
                 catch (Exception ex)
                 {
                     Debug.LogError($"Error deserializing configuration file {configPath}.  Loading defaults");
                     Debug.LogException(ex);
+
+                    //Continue to new create.
                 }
             }
 
-            //Exception or not set.
             ModConfig = SaveDefaults(configPath);
         }
 
         private static ModConfig SaveDefaults(string configPath)
         {
-            ModConfig config = new ModConfig();
+            ModConfig config = new ModConfig()
+            {
+                ColorConfig = new ColorConfig(),
+                Version = ModConfig.LatestVerison
+            };
 
             var seralizer = new Serializer();
             File.WriteAllText(configPath, seralizer.Serialize(config));

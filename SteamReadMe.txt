@@ -1,40 +1,46 @@
-[h1]Quasimorph Show Expiring Missions.[/h1]
+[h1]Quasimorph Mission Expire and Subscription Colors[/h1]
 
 
 
-[h1]Info[/h1]
-
-Adds indictors to the System screen for any missions that will expire before the ship can travel to that location.
+Adds the following indicators:
 
 Adds a "X (Y)" number to the planet list where X is the non expiring missions and Y is the total number of missions.
 
-The planet details will also color the text for any expiring missions.
+Colors the missions as follows:
+[list]
+[*]Will expire before the ship can travel to the location.
+[*]A subscribed faction is the benefit of the mission.
+[*]Two subscribed factions are attacking each other.
+[*]A subscribed faction is the victim of the mission.
+[/list]
 
-The color can be modified in the configuration.
+The subscription colors can be disabled and all colors can be customized.
+
+[h1]Upgrade Note[/h1]
+
+Version 2.0 will not retain the previous configuration changes.
+If the old config file format exists, it will be backed up with a .bak extension before being overwritten.
 
 [h1]Configuration[/h1]
 
 The configuration file is located at [i]%UserProfile%\AppData\LocalLow\Magnum Scriptum Ltd\Quasimorph\QM_MissionExpirationHighlight.yaml[/i] .
 The file will be created the first time the game is run.
-[table]
-[tr]
-[td]Name
-[/td]
-[td]Default
-[/td]
-[td]Description
-[/td]
-[/tr]
-[tr]
-[td]ExpiredMissionColor
-[/td]
-[td]#f475ee
-[/td]
-[td]The text color for expiring missions.
-[/td]
-[/tr]
-[/table]
+
+The [i]ColorConfig[/i] members contain all of the colors used by the mod.
+
+Set [i]EnableSubscriptionColors[/i] to false to disable the subscription indicators.
+
+[h1]Issues[/h1]
+
+Currently the main window does not update when faction subscriptions are changed.  Open and close the star map to refresh the main window.
 
 [h1]Source Code[/h1]
 
 Source code is available on GitHub https://github.com/NBKRedSpy/QM-MissionExpirationHighlight
+
+[h1]Change Log[/h1]
+
+[h2]2.0.0[/h2]
+
+Added faction subscription colors.
+Thanks to Steam user RafaelKB for the suggestion.

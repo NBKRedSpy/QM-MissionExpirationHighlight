@@ -3,18 +3,17 @@
     <TargetFramework>net48</TargetFramework>
     <OutputType>Library</OutputType>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+	  <VersionPrefix>2.0.0</VersionPrefix>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="BepInEx.AssemblyPublicizer.msbuild" Version="0.4.2">
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
+    <PackageReference Include="Lib.Harmony" Version="2.3.3" />
     <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
     <PackageReference Include="System.Data.DataSetExtensions" Version="4.5.0" />
     <PackageReference Include="yamldotnet" Version="15.3.0" />
-    <Reference Include="0Harmony">
-      <HintPath>D:\Games\Steam\steamapps\common\Quasimorph\BepInEx\core\0Harmony.dll</HintPath>
-    </Reference>
 	  <Reference Include="Mono.Cecil">
 		  <HintPath>E:\Downloads\Modding\BepInEx_win_x64_5.4.23.1\BepInEx\core\Mono.Cecil.dll</HintPath>
 	  </Reference>
@@ -57,7 +56,7 @@
 
   </ItemGroup>
   <Target Name="PostBuild" AfterTargets="PostBuildEvent">
-    <Exec Command="set targetDir=D:\Games\Steam\steamapps\workshop\content\2059170\3286658972\&#xD;&#xA;&#xD;&#xA;xcopy /y $(TargetDir)$(TargetName).* %25targetDir%25&#xD;&#xA;xcopy /y $(TargetDir)YamlDotNet.dll %25targetDir%25&#xD;&#xA;xcopy /y $(TargetDir)0Harmony.dll %25targetDir%25&#xD;&#xA;xcopy /y $(TargetDir)Mono.Cecil.dll %25targetDir%25&#xD;&#xA;xcopy /y $(TargetDir)MonoMod*.dll %25targetDir%25&#xD;&#xA;&#xD;&#xA;" />
+    <Exec Command="set targetDir=D:\Games\Steam\steamapps\workshop\content\2059170\3286658972\&#xD;&#xA;&#xD;&#xA;xcopy /y $(TargetDir)$(TargetName).* %25targetDir%25&#xD;&#xA;xcopy /y $(TargetDir)YamlDotNet.dll %25targetDir%25&#xD;&#xA;xcopy /y $(TargetDir)0Harmony.dll %25targetDir%25&#xD;&#xA;&#xD;&#xA;" />
   </Target>
 	
 	

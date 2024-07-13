@@ -5,15 +5,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using UnityEngine;
 
 namespace QM_MissionExpirationHighlight
 {
     [HarmonyPatch(typeof(StarmapScreen), nameof(StarmapScreen.Show))]
-    public static class StarmapScreen_Show_Patch
+    public static partial class StarmapScreen_Show_Patch
     {
+
         public static void Postfix(StarmapScreen __instance)
         {
-
             foreach (var panel in __instance._panels)
             {
 
@@ -29,6 +30,7 @@ namespace QM_MissionExpirationHighlight
                     //  I've accessed every variable used by GetTravelHoursBetweenPoints, but it only fails in the
                     //function call.  It seems to only affect the current location
 
+
                     travelHoursBetweenPoints = TravelSystem.GetTravelHoursBetweenPoints(
                         __instance._spaceObjects, __instance._travelMetadata.CurrentSpaceObject, panel.SpaceObjectId);
                 }
@@ -42,26 +44,24 @@ namespace QM_MissionExpirationHighlight
 
                 int totalMissions = 0;
                 int availableMissions = 0;
-
-                foreach (Mission value in __instance._missions.Values)
+                
+                foreach (Mission mission in __instance._missions.Values)
                 {
-                    if (__instance._stations.Get(value.StationId).Record.SpaceObjectId.Equals(panel._record.Id))
+                    if (__instance._stations.Get(mission.StationId).Record.SpaceObjectId.Equals(panel._record.Id))
                     {
-                        if (value.ExpireTime > eta)
+                        if (mission.ExpireTime > eta)
                         {
                             availableMissions++;
                         }
 
                         totalMissions++;
                     }
-
                 }
 
                 if(totalMissions != 0 && totalMissions != availableMissions)
                 {
                     panel._count.text = $"{availableMissions} ({totalMissions})";
                 }
-
             }
         }
 
