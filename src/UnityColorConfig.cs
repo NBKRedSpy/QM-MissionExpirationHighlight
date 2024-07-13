@@ -11,8 +11,6 @@ namespace QM_MissionExpirationHighlight
     {
         public Color ExpiredColor { get; set; }
 
-        public Color SubscribedColor { get; set; }
-
         public Color ConflictBoth { get; set; }
 
         public Color ConflictBenefit { get; set; }
