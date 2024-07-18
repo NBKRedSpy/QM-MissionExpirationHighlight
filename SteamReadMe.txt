@@ -30,9 +30,10 @@ The [i]ColorConfig[/i] members contain all of the colors used by the mod.
 
 Set [i]EnableSubscriptionColors[/i] to false to disable the subscription indicators.
 
-[h1]Issues[/h1]
+[h1]Support[/h1]
 
-Currently the main window does not update when faction subscriptions are changed.  Open and close the star map to refresh the main window.
+If you enjoy my mods and want to leave a tip, check out my [url=url=https://ko-fi.com/nbkredspy71915]Ko-Fi[/url] page.
+Thanks!
 
 [h1]Source Code[/h1]
 
