@@ -74,7 +74,13 @@ namespace QM_MissionExpirationHighlight
                         : (info & MissionInfo.Victim) == MissionInfo.Victim ? ColorConfig.ConflictVictim
                         : Color.black;
 
-                    if (conflictColor != Color.black)
+                    if (conflictColor == Color.black)
+                    {
+                        //Not sure why it is called previous status.  
+                        //It is the current status after the init.
+                        panel.RefreshStatus(panel._prevStatus);
+                    }
+                    else
                     {
                         button.RefreshNormalСaptionColor(conflictColor);
                     }
