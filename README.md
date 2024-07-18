@@ -29,7 +29,7 @@ The `ColorConfig` members contain all of the colors used by the mod.
 Set `EnableSubscriptionColors` to false to disable the subscription indicators.
 
 # Support
-If you enjoy my mods and want to leave a tip, check out my [Ko-Fi](url=https://ko-fi.com/nbkredspy71915) page.
+If you enjoy my mods and want to leave a tip, check out my [Ko-Fi](https://ko-fi.com/nbkredspy71915) page.
 Thanks!
 
 # Source Code
