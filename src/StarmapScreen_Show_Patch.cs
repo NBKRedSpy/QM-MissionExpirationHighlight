@@ -80,7 +80,7 @@ namespace QM_MissionExpirationHighlight
                                 bestMissionType = missionType;
                                 bestMissionColor = missionColor;
                             }
-                        } 
+                        }
                     }
                 }
 
@@ -88,7 +88,7 @@ namespace QM_MissionExpirationHighlight
                 //  can reach
                 //  less than benefit subscription.
                 //  no subscription
-\                if (availableMissions > 0)
+                if (availableMissions > 0)
                 {
                     if (bestMissionColor == Color.black)
                     {
@@ -99,7 +99,7 @@ namespace QM_MissionExpirationHighlight
                     {
                         //One or more subscribed.
                         string htmlColor = ColorUtility.ToHtmlStringRGB(bestMissionColor);
-                        panel._count.text = $"<color={htmlColor}>{availableMissions}</color>({totalMissions})";
+                        panel._count.text = $"<color=#{htmlColor}>{availableMissions}</color>({totalMissions})";
                     }
                 }
                 else
