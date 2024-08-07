@@ -3,6 +3,7 @@ using MGSC;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.NetworkInformation;
 using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
@@ -84,28 +85,26 @@ namespace QM_MissionExpirationHighlight
                     }
                 }
 
-                //Todo:  new level:
-                //  can reach
-                //  less than benefit subscription.
-                //  no subscription
                 if (availableMissions > 0)
                 {
                     if (bestMissionColor == Color.black)
                     {
-                        //Should be all unsubscribed.
-                        panel._count.text = $"{availableMissions} ({totalMissions})";
+                        //All available missions will be with no subscriptions
+                        string availableText = availableMissions == 0 ? $"{availableMissions} " : "";
+
+                        panel._count.text = $"{availableText}({totalMissions})";
                     }
                     else
                     {
                         //One or more subscribed.
                         string htmlColor = ColorUtility.ToHtmlStringRGB(bestMissionColor);
-                        panel._count.text = $"<color=#{htmlColor}>{availableMissions}</color>({totalMissions})";
+                        panel._count.text = $"<color=#{htmlColor}>{availableMissions}</color> ({totalMissions})";
                     }
                 }
                 else
                 {
                     //Should be all unreachable.  Use the game's single count text.
-                    panel._count.text = $"{availableMissions}";
+                    panel._count.text = $"{totalMissions}";
                 }
             }
         }

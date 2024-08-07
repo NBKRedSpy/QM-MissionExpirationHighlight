@@ -94,14 +94,38 @@ namespace QM_MissionExpirationHighlight
         public static Color GetConflictColor(HashSet<string> subscriptions, Mission mission, out MissionInfo missionInfo)
         {
             missionInfo = MissionInfo.None;
+            int missionFlags = 0;
 
-            if (subscriptions.Contains(mission.VictimFactionId)) missionInfo|= MissionInfo.Victim;
-            if (subscriptions.Contains(mission.BeneficiaryFactionId)) missionInfo|= MissionInfo.Benefit;
+            if (subscriptions.Contains(mission.VictimFactionId)) missionFlags |= (int)MissionInfo.Victim;
+            if (subscriptions.Contains(mission.BeneficiaryFactionId)) missionFlags |= (int)MissionInfo.Benefit;
 
-            Color conflictColor = (missionInfo& MissionInfo.Both) == MissionInfo.Both ? ColorConfig.ConflictBoth
-                : (missionInfo& MissionInfo.Benefit) == MissionInfo.Benefit ? ColorConfig.ConflictBenefit
-                : (missionInfo& MissionInfo.Victim) == MissionInfo.Victim ? ColorConfig.ConflictVictim
-                : Color.black;
+            const int bothFlags = (int)MissionInfo.Victim | (int)MissionInfo.Benefit;
+
+            if (((int)missionInfo & bothFlags) == bothFlags) missionInfo = MissionInfo.Both;
+
+
+            missionInfo = (missionFlags & bothFlags) == bothFlags ? MissionInfo.Both : missionInfo;
+
+            Color conflictColor;
+
+            switch (missionInfo)
+            {
+                case MissionInfo.Victim:
+                    conflictColor = ColorConfig.ConflictVictim;
+                    break;
+                case MissionInfo.Both:
+                    conflictColor = ColorConfig.ConflictBoth;
+                    break;
+                case MissionInfo.None:
+                    conflictColor = Color.black;  //Todo probably create a new color to support the side bar?
+                    break;
+                case MissionInfo.Benefit:
+                    conflictColor = ColorConfig.ConflictBenefit;
+                    break;
+                default:
+                    throw new ApplicationException($"Unexpected mission info value: {missionInfo}");
+            }
+
             return conflictColor;
         }
     }
