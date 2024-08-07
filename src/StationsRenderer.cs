@@ -93,20 +93,25 @@ namespace QM_MissionExpirationHighlight
         /// <returns>The mission color.  Returns Color.black if there is no conflict</returns>
         public static Color GetConflictColor(HashSet<string> subscriptions, Mission mission, out MissionInfo missionInfo)
         {
+            bool isVictim = false;
+            bool isBenefit = false;
+
+            missionInfo = MissionInfo.Invalid;
+
+            if (subscriptions.Contains(mission.VictimFactionId)) isVictim = true;
+            if (subscriptions.Contains(mission.BeneficiaryFactionId)) isBenefit = true;
+
             missionInfo = MissionInfo.None;
-            int missionFlags = 0;
 
-            if (subscriptions.Contains(mission.VictimFactionId)) missionFlags |= (int)MissionInfo.Victim;
-            if (subscriptions.Contains(mission.BeneficiaryFactionId)) missionFlags |= (int)MissionInfo.Benefit;
-
-            const int bothFlags = (int)MissionInfo.Victim | (int)MissionInfo.Benefit;
-
-            if (((int)missionInfo & bothFlags) == bothFlags) missionInfo = MissionInfo.Both;
-
-
-            missionInfo = (missionFlags & bothFlags) == bothFlags ? MissionInfo.Both : missionInfo;
+            missionInfo = (missionInfo & bothFlags) == bothFlags ? MissionInfo.Both : missionInfo;
 
             Color conflictColor;
+
+            missionInfo =
+                isVictim && isBenefit ? MissionInfo.Both :
+                isVictim ? MissionInfo.Victim :
+                isBenefit ? MissionInfo.Benefit :
+                MissionInfo.None;
 
             switch (missionInfo)
             {
