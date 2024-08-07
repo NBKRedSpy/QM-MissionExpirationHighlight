@@ -35,11 +35,11 @@ namespace QM_MissionExpirationHighlight
 
             if (File.Exists(configPath))
             {
-                var deseralizer = new Deserializer();
+                var deserializer = new Deserializer();
 
                 try
                 {
-                    ModConfig = deseralizer.Deserialize<ModConfig>(File.ReadAllText(configPath));
+                    ModConfig = deserializer.Deserialize<ModConfig>(File.ReadAllText(configPath));
 
                     if (ModConfig.Version == ModConfig.LatestVerison)
                     {
@@ -73,8 +73,8 @@ namespace QM_MissionExpirationHighlight
                 Version = ModConfig.LatestVerison
             };
 
-            var seralizer = new Serializer();
-            File.WriteAllText(configPath, seralizer.Serialize(config));
+            var serializer = new Serializer();
+            File.WriteAllText(configPath, serializer.Serialize(config));
 
             return config;
         }

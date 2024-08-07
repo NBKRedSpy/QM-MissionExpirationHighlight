@@ -10,7 +10,8 @@ namespace QM_MissionExpirationHighlight
 {
 
     /// <summary>
-    /// Handles modifying the graphics for the mod's functionality
+    /// Responsible for the grid of missions at a station.
+    /// This is the box on the space main screen and the also the box on the right side of the star map.
     /// </summary>
     public static class StationsRenderer
     {
@@ -39,11 +40,13 @@ namespace QM_MissionExpirationHighlight
 
             foreach (SpaceStationPanel panel in SingletonMonoBehaviour<SpaceUI>.Instance.Hud.SpaceStationsWindow._panels)
             {
+                //IIRC, at this point the game has the current status as the "prevStatus"
                 if (panel._prevStatus == StationStatus.Peaceful)
                 {
                     continue;
                 }
 
+                //Missions is the database of all missions, keyed by station id.
                 Mission mission = panel._missions.Get(panel._station.Id);
 
                 if (mission == null)
@@ -51,6 +54,7 @@ namespace QM_MissionExpirationHighlight
                     continue;
                 }
 
+                //The individual location box.
                 CommonButton button = panel._visualWrapper._button;
 
                 if (checkEta && (mission.ExpireTime < eta))

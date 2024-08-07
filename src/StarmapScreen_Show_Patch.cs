@@ -9,6 +9,11 @@ using UnityEngine;
 
 namespace QM_MissionExpirationHighlight
 {
+
+    /// <summary>
+    /// Handles the list of stations on the left side of the star map.
+    /// For Example:  Venus 1 (3)
+    /// </summary>
     [HarmonyPatch(typeof(StarmapScreen), nameof(StarmapScreen.Show))]
     public static partial class StarmapScreen_Show_Patch
     {
