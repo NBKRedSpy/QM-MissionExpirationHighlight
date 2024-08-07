@@ -67,16 +67,7 @@ namespace QM_MissionExpirationHighlight
 
                 if(Plugin.ModConfig.EnableSubscriptionColors)
                 {
-                    MissionInfo info = MissionInfo.None;
-
-                    //If both an attacker and a defender is
-                    if (subscriptions.Contains(mission.VictimFactionId)) info |= MissionInfo.Victim;
-                    if (subscriptions.Contains(mission.BeneficiaryFactionId)) info |= MissionInfo.Benefit;
-
-                    Color conflictColor = (info & MissionInfo.Both) == MissionInfo.Both ? ColorConfig.ConflictBoth
-                        : (info & MissionInfo.Benefit) == MissionInfo.Benefit ? ColorConfig.ConflictBenefit
-                        : (info & MissionInfo.Victim) == MissionInfo.Victim ? ColorConfig.ConflictVictim
-                        : Color.black;
+                    Color conflictColor = GetConflictColor(subscriptions, mission, out MissionInfo _);
 
                     if (conflictColor == Color.black)
                     {
@@ -91,6 +82,27 @@ namespace QM_MissionExpirationHighlight
                 }
 
             }
+        }
+
+        /// <summary>
+        /// Returns the mission color and the overall type of the mission.
+        /// </summary>
+        /// <param name="subscriptions">The user's faction subscriptions</param>
+        /// <param name="mission">The mission to check</param>
+        /// <param name="missionInfo">Type of the mission from best to worst.</param>
+        /// <returns>The mission color.  Returns Color.black if there is no conflict</returns>
+        public static Color GetConflictColor(HashSet<string> subscriptions, Mission mission, out MissionInfo missionInfo)
+        {
+            missionInfo = MissionInfo.None;
+
+            if (subscriptions.Contains(mission.VictimFactionId)) missionInfo|= MissionInfo.Victim;
+            if (subscriptions.Contains(mission.BeneficiaryFactionId)) missionInfo|= MissionInfo.Benefit;
+
+            Color conflictColor = (missionInfo& MissionInfo.Both) == MissionInfo.Both ? ColorConfig.ConflictBoth
+                : (missionInfo& MissionInfo.Benefit) == MissionInfo.Benefit ? ColorConfig.ConflictBenefit
+                : (missionInfo& MissionInfo.Victim) == MissionInfo.Victim ? ColorConfig.ConflictVictim
+                : Color.black;
+            return conflictColor;
         }
     }
 }
