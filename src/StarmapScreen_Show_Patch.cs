@@ -49,23 +49,63 @@ namespace QM_MissionExpirationHighlight
 
                 int totalMissions = 0;
                 int availableMissions = 0;
-                
+
+                Color bestMissionColor = Color.black;
+                MissionInfo bestMissionType = MissionInfo.Invalid;
+
+                HashSet<string> subscriptions = new HashSet<string>(__instance._factions.SubscribedFactions);
+
                 foreach (Mission mission in __instance._missions.Values)
                 {
                     if (__instance._stations.Get(mission.StationId).Record.SpaceObjectId.Equals(panel._record.Id))
                     {
+                        bool canReach = false;
+
                         if (mission.ExpireTime > eta)
                         {
                             availableMissions++;
+                            canReach = true;
                         }
 
                         totalMissions++;
+
+                        if (canReach)
+                        {
+                            //Get the best color for the missions
+                            Color missionColor;
+                            missionColor = StationsRenderer.GetConflictColor(subscriptions, mission, out MissionInfo missionType);
+
+                            if (missionType > bestMissionType)
+                            {
+                                bestMissionType = missionType;
+                                bestMissionColor = missionColor;
+                            }
+                        } 
                     }
                 }
 
-                if(totalMissions != 0 && totalMissions != availableMissions)
+                //Todo:  new level:
+                //  can reach
+                //  less than benefit subscription.
+                //  no subscription
+\                if (availableMissions > 0)
                 {
-                    panel._count.text = $"{availableMissions} ({totalMissions})";
+                    if (bestMissionColor == Color.black)
+                    {
+                        //Should be all unsubscribed.
+                        panel._count.text = $"{availableMissions} ({totalMissions})";
+                    }
+                    else
+                    {
+                        //One or more subscribed.
+                        string htmlColor = ColorUtility.ToHtmlStringRGB(bestMissionColor);
+                        panel._count.text = $"<color={htmlColor}>{availableMissions}</color>({totalMissions})";
+                    }
+                }
+                else
+                {
+                    //Should be all unreachable.  Use the game's single count text.
+                    panel._count.text = $"{availableMissions}";
                 }
             }
         }
