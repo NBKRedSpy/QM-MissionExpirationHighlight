@@ -19,8 +19,15 @@ namespace QM_MissionExpirationHighlight
     public static partial class StarmapScreen_Show_Patch
     {
 
+        /// <summary>
+        /// This is the lighter green color is used for the game's default mission count in the panel.
+        /// </summary>
+        private static Color GreenColor { get; } = new Color(.388f, .549f, .368f);
+
         public static void Postfix(StarmapScreen __instance)
         {
+            HashSet<string> subscriptions = new HashSet<string>(__instance._factions.SubscribedFactions);
+
             foreach (var panel in __instance._panels)
             {
 
@@ -54,7 +61,6 @@ namespace QM_MissionExpirationHighlight
                 Color bestMissionColor = Color.black;
                 MissionInfo bestMissionType = MissionInfo.Invalid;
 
-                HashSet<string> subscriptions = new HashSet<string>(__instance._factions.SubscribedFactions);
 
                 foreach (Mission mission in __instance._missions.Values)
                 {
@@ -87,7 +93,13 @@ namespace QM_MissionExpirationHighlight
                     }
                 }
 
+                //Reset the color set by the game.  It changes based on subscription, but this
+                //mod now handles that.
+
+                panel._count.color = GreenColor;
                 panel._count.text = GetLabelText(availableMissions, totalMissions, bestMissionColor);
+
+
             }
         }
 
