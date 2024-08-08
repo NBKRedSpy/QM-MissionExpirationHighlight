@@ -104,7 +104,7 @@ namespace QM_MissionExpirationHighlight
                 hasVictim && hasBenefit ? MissionInfo.Both :
                 hasVictim ? MissionInfo.Victim :
                 hasBenefit ? MissionInfo.Benefit :
-                MissionInfo.None;
+                MissionInfo.None;   
                 
 
             Color conflictColor;

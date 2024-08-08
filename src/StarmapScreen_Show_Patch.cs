@@ -58,56 +58,71 @@ namespace QM_MissionExpirationHighlight
 
                 foreach (Mission mission in __instance._missions.Values)
                 {
-                    if (__instance._stations.Get(mission.StationId).Record.SpaceObjectId.Equals(panel._record.Id))
-                    {
-                        bool canReach = false;
+                    if (__instance._stations.Get(mission.StationId).Record.SpaceObjectId != panel._record.Id)
+                    { 
+                        continue; 
+                    }
 
-                        if (mission.ExpireTime > eta)
+                    bool canReach = false;
+
+                    if (mission.ExpireTime > eta)
+                    {
+                        availableMissions++;
+                        canReach = true;
+                    }
+
+                    totalMissions++;
+
+                    if (canReach)
+                    {
+                        //Get the best color for the missions
+                        Color missionColor;
+                        missionColor = StationsRenderer.GetConflictColor(subscriptions, mission, out MissionInfo missionType);
+
+                        if (missionType > bestMissionType)
                         {
-                            availableMissions++;
-                            canReach = true;
-                        }
-
-                        totalMissions++;
-
-                        if (canReach)
-                        {
-                            //Get the best color for the missions
-                            Color missionColor;
-                            missionColor = StationsRenderer.GetConflictColor(subscriptions, mission, out MissionInfo missionType);
-
-                            if (missionType > bestMissionType)
-                            {
-                                bestMissionType = missionType;
-                                bestMissionColor = missionColor;
-                            }
+                            bestMissionType = missionType;
+                            bestMissionColor = missionColor;
                         }
                     }
                 }
 
-                if (availableMissions > 0)
-                {
-                    if (bestMissionColor == Color.black)
-                    {
-                        //All available missions will be with no subscriptions
-                        string availableText = availableMissions == 0 ? $"{availableMissions} " : "";
-
-                        panel._count.text = $"{availableText}({totalMissions})";
-                    }
-                    else
-                    {
-                        //One or more subscribed.
-                        string htmlColor = ColorUtility.ToHtmlStringRGB(bestMissionColor);
-                        panel._count.text = $"<color=#{htmlColor}>{availableMissions}</color> ({totalMissions})";
-                    }
-                }
-                else
-                {
-                    //Should be all unreachable.  Use the game's single count text.
-                    panel._count.text = $"{totalMissions}";
-                }
+                panel._count.text = GetLabelText(availableMissions, totalMissions, bestMissionColor);
             }
         }
 
+        /// <summary>
+        /// Returns the mission number part of a planet.
+        /// </summary>
+        /// <param name="availableMissions">The missions that can be reached in time.</param>
+        /// <param name="totalMissions">The total number of missions available.</param>
+        /// <param name="color">The color to use.  If black, no color will be used.</param>
+        /// <returns>The TextMeshPro formatted text</returns>
+        private static string GetLabelText(int availableMissions, int totalMissions, Color color)
+        {
+
+            string baseText;
+
+            if(availableMissions == totalMissions)
+            {
+                baseText = $"{{0}}{totalMissions}{{1}}";
+            }
+            else
+            {
+                baseText = $"{{0}}{availableMissions}{{1}} ({totalMissions})";
+            }
+
+            string colorPrefix = "";
+            string colorSuffix = "";
+
+            if (color != Color.black)
+            {
+                colorPrefix = $"<color=#{ColorUtility.ToHtmlStringRGB(color)}>";
+                colorSuffix = "</color>";
+            }
+
+            return string.Format(baseText, colorPrefix, colorSuffix);
+
+        }
     }
 }
