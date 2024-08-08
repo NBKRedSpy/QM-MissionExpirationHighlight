@@ -22,7 +22,7 @@ namespace QM_MissionExpirationHighlight
         /// <summary>
         /// This is the lighter green color is used for the game's default mission count in the panel.
         /// </summary>
-        private static string GreenColorHtml { get; } = new Color(.388f, .549f, .368f);
+        private static string GreenColorHtml { get; } = "#638C5E";
 
         public static void Postfix(StarmapScreen __instance)
         {
@@ -111,13 +111,16 @@ namespace QM_MissionExpirationHighlight
 
             string baseText;
 
+            //Recolor the text string to the game's green since the game's code changes the .color property
+            //  based on the subscription status.  So it is confusing to see some numbers colored with a similar
+            //  color to the mod's color palette.
             if(availableMissions == totalMissions)
             {
-                baseText = $"{{0}}{totalMissions}{{1}}";
+                baseText = $"<color={GreenColorHtml}>{{0}}{totalMissions}{{1}}</color>";
             }
             else
             {
-                baseText = $"{{0}}{availableMissions}{{1}} ({totalMissions})";
+                baseText = $"<color={GreenColorHtml}>{{0}}{availableMissions}{{1}} ({totalMissions})</color>";
             }
 
             string colorPrefix = "";
