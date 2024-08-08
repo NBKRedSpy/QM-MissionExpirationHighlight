@@ -118,7 +118,7 @@ namespace QM_MissionExpirationHighlight
                     conflictColor = ColorConfig.ConflictBoth;
                     break;
                 case MissionInfo.None:
-                    conflictColor = Color.black;  //Todo probably create a new color to support the side bar?
+                    conflictColor = ColorConfig.NormalConflict;
                     break;
                 case MissionInfo.Benefit:
                     conflictColor = ColorConfig.ConflictBenefit;

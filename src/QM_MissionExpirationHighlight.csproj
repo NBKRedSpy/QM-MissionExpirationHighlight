@@ -3,7 +3,7 @@
     <TargetFramework>net48</TargetFramework>
     <OutputType>Library</OutputType>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
-	  <VersionPrefix>2.1.0</VersionPrefix>
+	  <VersionPrefix>3.0.0</VersionPrefix>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="BepInEx.AssemblyPublicizer.msbuild" Version="0.4.2">
