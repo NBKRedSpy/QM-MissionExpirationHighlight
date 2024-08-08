@@ -61,6 +61,7 @@ namespace QM_MissionExpirationHighlight
                 Color bestMissionColor = Color.black;
                 MissionInfo bestMissionType = MissionInfo.Invalid;
 
+                //TODO: Make a color for "no subscription" type attacks.  Probably the yellow that is used by the mission icon.
 
                 foreach (Mission mission in __instance._missions.Values)
                 {
