@@ -20,5 +20,7 @@ namespace QM_MissionExpirationHighlight
 
         public Color ConflictVictim { get; set; }
 
+        public Color NormalConflict { get; set; }
+
     }
 }

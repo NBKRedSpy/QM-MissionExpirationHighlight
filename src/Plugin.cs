@@ -39,7 +39,16 @@ namespace QM_MissionExpirationHighlight
 
                 try
                 {
-                    ModConfig = deserializer.Deserialize<ModConfig>(File.ReadAllText(configPath));
+                    string yaml = File.ReadAllText(configPath);
+                    ModConfig = deserializer.Deserialize<ModConfig>(yaml);
+
+                    //Update the config with any new defaults.
+                    string serializeYaml = new Serializer().Serialize(ModConfig);
+
+                    if(serializeYaml != yaml)
+                    {
+                        File.WriteAllText(configPath, serializeYaml);
+                    }
 
                     if (ModConfig.Version == ModConfig.LatestVerison)
                     {
@@ -49,7 +58,6 @@ namespace QM_MissionExpirationHighlight
                     {
                         //Backup the old version, but create a new one.
                         File.Copy(configPath, configPath + ".bak");
-
                         //Fall through to the create.
                     }
                 }
