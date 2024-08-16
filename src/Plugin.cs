@@ -28,6 +28,8 @@ namespace QM_MissionExpirationHighlight
             new Harmony("QM_MissionExpirationHighlight").PatchAll();
         }
 
+
+        //TODO: Change to a watcher config
         private static void LoadConfig()
         {
             string configPath = Path.Combine(Application.persistentDataPath, Assembly.GetExecutingAssembly().GetName().Name) + ".yaml";
@@ -35,11 +37,20 @@ namespace QM_MissionExpirationHighlight
 
             if (File.Exists(configPath))
             {
-                var deseralizer = new Deserializer();
+                var deserializer = new Deserializer();
 
                 try
                 {
-                    ModConfig = deseralizer.Deserialize<ModConfig>(File.ReadAllText(configPath));
+                    string yaml = File.ReadAllText(configPath);
+                    ModConfig = deserializer.Deserialize<ModConfig>(yaml);
+
+                    //Update the config with any new defaults.
+                    string serializeYaml = new Serializer().Serialize(ModConfig);
+
+                    if(serializeYaml != yaml)
+                    {
+                        File.WriteAllText(configPath, serializeYaml);
+                    }
 
                     if (ModConfig.Version == ModConfig.LatestVerison)
                     {
@@ -49,7 +60,6 @@ namespace QM_MissionExpirationHighlight
                     {
                         //Backup the old version, but create a new one.
                         File.Copy(configPath, configPath + ".bak");
-
                         //Fall through to the create.
                     }
                 }
@@ -73,8 +83,8 @@ namespace QM_MissionExpirationHighlight
                 Version = ModConfig.LatestVerison
             };
 
-            var seralizer = new Serializer();
-            File.WriteAllText(configPath, seralizer.Serialize(config));
+            var serializer = new Serializer();
+            File.WriteAllText(configPath, serializer.Serialize(config));
 
             return config;
         }

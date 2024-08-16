@@ -9,6 +9,9 @@ using UnityEngine;
 
 namespace QM_MissionExpirationHighlight
 {
+    /// <summary>
+    /// Handles refreshing the stations box when the subscriptions change.
+    /// </summary>
     [HarmonyPatch(typeof(FactionsScreen), nameof(FactionsScreen.OnFactionSubscribeStatusChanged))]
     public static class FactionsScreen_OnFactionSubscribeStatusChanged_Patch
     {

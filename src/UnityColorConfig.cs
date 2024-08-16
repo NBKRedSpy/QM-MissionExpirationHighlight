@@ -7,6 +7,9 @@ using UnityEngine;
 
 namespace QM_MissionExpirationHighlight
 {
+    /// <summary>
+    /// The color from the config, translated to Unity Color objects for the mod's use.
+    /// </summary>
     public class UnityColorConfig
     {
         public Color ExpiredColor { get; set; }
@@ -16,6 +19,8 @@ namespace QM_MissionExpirationHighlight
         public Color ConflictBenefit { get; set; }
 
         public Color ConflictVictim { get; set; }
+
+        public Color NormalConflict { get; set; }
 
     }
 }

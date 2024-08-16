@@ -4,6 +4,29 @@
 
 ![alt text](<Color Key.png>)
 
+
+# Todo
+
+List of factions:
+AnCom
+Tezctlan
+XiomaraMasks
+SBN
+RealWare
+DaydreamChems
+PlanetBridge
+Grasshopper
+Sunlight
+FrancheComte
+ChurchRevelation
+CoreWard
+CResistance
+EipschwitzHead
+Unknown
+Magnum
+#
+
+
 Adds the following indicators:
 
 Adds a "X (Y)" number to the planet list where X is the non expiring missions and Y is the total number of missions.

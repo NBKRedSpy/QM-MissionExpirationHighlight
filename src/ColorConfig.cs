@@ -19,12 +19,15 @@ namespace QM_MissionExpirationHighlight
 
         public string ConflictVictim { get; set; }
 
+        public string NormalConflict { get; set; }
+
         public ColorConfig()
         {
             ExpiredColor = "#f475ee";
             ConflictBoth = "#FFD800";
             ConflictBenefit = "#4CFF00";
             ConflictVictim = "#FF0000";
+            NormalConflict = "#FBE343";  //The game's yellow color used by the mission icons.
         }
         public UnityColorConfig GetUnityConfig()
         {
@@ -37,6 +40,7 @@ namespace QM_MissionExpirationHighlight
                 ConflictBoth = Utility.ParseHtmlColor(ConflictBoth, defaults.ConflictBoth),
                 ConflictBenefit = Utility.ParseHtmlColor(ConflictBenefit, defaults.ConflictBenefit),
                 ConflictVictim = Utility.ParseHtmlColor(ConflictVictim, defaults.ConflictVictim),
+                NormalConflict = Utility.ParseHtmlColor(NormalConflict, defaults.NormalConflict),
             };
         }
     }

@@ -8,8 +8,15 @@ using UnityEngine;
 
 namespace QM_MissionExpirationHighlight
 {
+
     public static class Utility
     {
+        /// <summary>
+        /// Translates an HTML color string to a Unity Color
+        /// </summary>
+        /// <param name="htmlColor">The HTML color string, as accepted by Unity's ColorUtility.TryParseHtmlString.  Ex:  #FF0000</param>
+        /// <param name="fallbackColor">The color to use if the html color string is invalid.</param>
+        /// <returns></returns>
         public static Color ParseHtmlColor(string htmlColor, string fallbackColor)
         {
             bool isSuccess;

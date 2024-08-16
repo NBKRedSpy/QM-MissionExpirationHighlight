@@ -10,16 +10,17 @@ namespace QM_MissionExpirationHighlight
 {
 
     /// <summary>
-    /// Handles modifying the graphics for the mod's functionality
+    /// Responsible for the grid of missions at a station.
+    /// This is the box on the space main screen and the also the box on the right side of the star map.
     /// </summary>
     public static class StationsRenderer
     {
         public static UnityColorConfig ColorConfig;
+        public static HashSet<string> AttackSubscriptions = null;
 
-        public static void Modify(SpaceStationsWindow window, SpaceObjects spaceObjects = null, string spaceObjectId = null)
+        public static void Modify(SpaceStationsWindow window, SpaceObjects spaceObjects = null,
+            string spaceObjectId = null)
         {
-
-
             bool checkEta = spaceObjects != null 
                 && !string.IsNullOrEmpty(spaceObjectId) 
                 && (!spaceObjectId.Equals(window._travelMetadata.CurrentSpaceObject));
@@ -39,11 +40,13 @@ namespace QM_MissionExpirationHighlight
 
             foreach (SpaceStationPanel panel in SingletonMonoBehaviour<SpaceUI>.Instance.Hud.SpaceStationsWindow._panels)
             {
+                //IIRC, at this point the game has the current status as the "prevStatus"
                 if (panel._prevStatus == StationStatus.Peaceful)
                 {
                     continue;
                 }
 
+                //Missions is the database of all missions, keyed by station id.
                 Mission mission = panel._missions.Get(panel._station.Id);
 
                 if (mission == null)
@@ -51,6 +54,7 @@ namespace QM_MissionExpirationHighlight
                     continue;
                 }
 
+                //The individual location box.
                 CommonButton button = panel._visualWrapper._button;
 
                 if (checkEta && (mission.ExpireTime < eta))
@@ -63,16 +67,7 @@ namespace QM_MissionExpirationHighlight
 
                 if(Plugin.ModConfig.EnableSubscriptionColors)
                 {
-                    MissionInfo info = MissionInfo.None;
-
-                    //If both an attacker and a defender is
-                    if (subscriptions.Contains(mission.VictimFactionId)) info |= MissionInfo.Victim;
-                    if (subscriptions.Contains(mission.BeneficiaryFactionId)) info |= MissionInfo.Benefit;
-
-                    Color conflictColor = (info & MissionInfo.Both) == MissionInfo.Both ? ColorConfig.ConflictBoth
-                        : (info & MissionInfo.Benefit) == MissionInfo.Benefit ? ColorConfig.ConflictBenefit
-                        : (info & MissionInfo.Victim) == MissionInfo.Victim ? ColorConfig.ConflictVictim
-                        : Color.black;
+                    Color conflictColor = GetConflictColor(subscriptions, mission, out MissionInfo _);
 
                     if (conflictColor == Color.black)
                     {
@@ -87,6 +82,83 @@ namespace QM_MissionExpirationHighlight
                 }
 
             }
+        }
+
+        /// <summary>
+        /// Returns the mission color and the overall type of the mission.
+        /// Includes the "Attack Subscriptions" from the config.  "Attack Subscriptions"
+        /// override the subscription colors if matched.
+        /// </summary>
+        /// <param name="subscriptions">The user's faction subscriptions</param>
+        /// <param name="mission">The mission to check</param>
+        /// <param name="missionInfo">Type of the mission from best to worst.</param>
+        /// <returns>The mission color.  Returns Color.black if there is no conflict</returns>
+        public static Color GetConflictColor(HashSet<string> subscriptions, Mission mission, out MissionInfo missionInfo)
+        {
+            if (AttackSubscriptions == null)
+            {
+                AttackSubscriptions = Plugin.ModConfig.EnableAttackFactions ?
+                    Plugin.ModConfig.AttackFactionIds : new HashSet<string>();
+            }
+
+            bool hasVictim = false;
+            bool hasBenefit = false;
+            bool missionIsSet = false;
+
+            //----Anti-subscription (ex: benefiting is bad)
+
+            //If subscribed, ignore the anti-subscription
+            //HACK: Should just be in the config refresh.
+
+            HashSet<string> adjAttackSubscriptions = new HashSet<string>(AttackSubscriptions);;
+            adjAttackSubscriptions.RemoveWhere(x => subscriptions.Contains(x));
+
+            if (adjAttackSubscriptions.Contains(mission.VictimFactionId))
+            {
+                hasBenefit = true;
+                missionIsSet = true;
+            }
+
+            if (adjAttackSubscriptions.Contains(mission.BeneficiaryFactionId))
+            {
+                hasVictim = true;
+                missionIsSet = true;
+            }
+
+            //----- Regular Subscription (ex: benefiting is good)
+            if(!missionIsSet)
+            {
+                if (subscriptions.Contains(mission.VictimFactionId)) hasVictim = true;
+                if (subscriptions.Contains(mission.BeneficiaryFactionId)) hasBenefit = true;
+            }
+
+            missionInfo =
+                hasVictim && hasBenefit ? MissionInfo.Both :
+                hasVictim ? MissionInfo.Victim :
+                hasBenefit ? MissionInfo.Benefit :
+                MissionInfo.None;   
+
+            Color conflictColor;
+
+            switch (missionInfo)
+            {
+                case MissionInfo.Victim:
+                    conflictColor = ColorConfig.ConflictVictim;
+                    break;
+                case MissionInfo.Both:
+                    conflictColor = ColorConfig.ConflictBoth;
+                    break;
+                case MissionInfo.None:
+                    conflictColor = ColorConfig.NormalConflict;
+                    break;
+                case MissionInfo.Benefit:
+                    conflictColor = ColorConfig.ConflictBenefit;
+                    break;
+                default:
+                    throw new ApplicationException($"Unexpected mission info value: {missionInfo}");
+            }
+
+            return conflictColor;
         }
     }
 }
