@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace QM_MissionExpirationHighlight
 {
@@ -44,19 +45,20 @@ namespace QM_MissionExpirationHighlight
                     continue;
                 }
 
-                Mission mission = panel._missions.Get(panel._station.Id);
+                Mission mission = panel._missions.Get(panel._station.Id, false);
 
                 if (mission == null)
                 {
                     continue;
                 }
 
-                CommonButton button = panel._visualWrapper._button;
+                Image image = panel._visualWrapper.GetComponent<Image>();
+                if (image == null) return;
 
                 if (checkEta && (mission.ExpireTime < eta))
                 {
-                    
-                    button.RefreshNormalСaptionColor(ColorConfig.ExpiredColor);
+
+                    image.color = ColorConfig.ExpiredColor;
                     continue;
                 }
 
@@ -82,7 +84,7 @@ namespace QM_MissionExpirationHighlight
                     }
                     else
                     {
-                        button.RefreshNormalСaptionColor(conflictColor);
+                        image.color = conflictColor;
                     }
                 }
 

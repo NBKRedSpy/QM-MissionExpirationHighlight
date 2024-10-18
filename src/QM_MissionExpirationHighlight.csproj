@@ -3,7 +3,7 @@
     <TargetFramework>net48</TargetFramework>
     <OutputType>Library</OutputType>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
-	  <VersionPrefix>2.1.0</VersionPrefix>
+	  <VersionPrefix>2.2.0</VersionPrefix>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="BepInEx.AssemblyPublicizer.msbuild" Version="0.4.2">
@@ -52,11 +52,14 @@
 		  <SpecificVersion>False</SpecificVersion>
 		  <HintPath>D:\Games\Steam\steamapps\common\Quasimorph\Quasimorph_Data\Managed\UnityEngine.CoreModule.dll</HintPath>
 	  </Reference>
+	  <Reference Include="UnityEngine.UI">
+	    <HintPath>D:\Games\Steam\steamapps\common\Quasimorph\Quasimorph_Data\Managed\UnityEngine.UI.dll</HintPath>
+	  </Reference>
 	  
 
   </ItemGroup>
   <Target Name="PostBuild" AfterTargets="PostBuildEvent">
-    <Exec Command="set targetDir=D:\Games\Steam\steamapps\workshop\content\2059170\3286658972\&#xD;&#xA;&#xD;&#xA;xcopy /y $(TargetDir)$(TargetName).* %25targetDir%25&#xD;&#xA;xcopy /y $(TargetDir)YamlDotNet.dll %25targetDir%25&#xD;&#xA;xcopy /y $(TargetDir)0Harmony.dll %25targetDir%25&#xD;&#xA;&#xD;&#xA;" />
+    <Exec Command="set targetDir=D:\Games\Steam\steamapps\workshop\content\2059170\3286658972\&#xD;&#xA;&#xD;&#xA;xcopy /f /y $(TargetDir)$(TargetName).* %25targetDir%25&#xD;&#xA;xcopy /f/y $(TargetDir)YamlDotNet.dll %25targetDir%25&#xD;&#xA;xcopy /f /y $(TargetDir)0Harmony.dll %25targetDir%25&#xD;&#xA;&#xD;&#xA;" />
   </Target>
 	
 	

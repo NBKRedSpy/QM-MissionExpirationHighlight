@@ -41,10 +41,10 @@ Source code is available on GitHub https://github.com/NBKRedSpy/QM-MissionExpira
 
 [h1]Change Log[/h1]
 
-[h2]2.0.0[/h2]
-
-Added faction subscription colors.
-Thanks to Steam user RafaelKB for the suggestion.
+[h2]2.2.0[/h2]
+[list]
+[*]Preliminary support for .8 as the previous version crashes in .8.  Needs color fixes.
+[/list]
 
 [h2]2.1.0[/h2]
 
@@ -53,3 +53,8 @@ Fixes:
 [*]Factions subscriptions screen not updating on change.
 [*]Not updating when returning to the main hud.
 [/list]
+
+[h2]2.0.0[/h2]
+
+Added faction subscription colors.
+Thanks to Steam user RafaelKB for the suggestion.
