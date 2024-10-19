@@ -16,11 +16,6 @@ Colors the missions as follows:
 
 The subscription colors can be disabled and all colors can be customized.
 
-[h1]Upgrade Note[/h1]
-
-Version 2.0 will not retain the previous configuration changes.
-If the old config file format exists, it will be backed up with a .bak extension before being overwritten.
-
 [h1]Configuration[/h1]
 
 The configuration file is located at [i]%UserProfile%\AppData\LocalLow\Magnum Scriptum Ltd\Quasimorph\QM_MissionExpirationHighlight.yaml[/i] .
@@ -40,6 +35,11 @@ Thanks!
 Source code is available on GitHub https://github.com/NBKRedSpy/QM-MissionExpirationHighlight
 
 [h1]Change Log[/h1]
+
+[h2]2.3.0[/h2]
+[list]
+[*]Converted to colored bar at bottom of mission.
+[/list]
 
 [h2]2.2.1[/h2]
 [list]

@@ -1,8 +1,7 @@
 # Quasimorph Mission Expire and Subscription Colors
 
-![alt text](media/PlanetList.png)
-
-![alt text](<Color Key.png>)
+![Color Key](media/thumbnail.png)
+![Planet Mission Count](media/PlanetList.png)
 
 Adds the following indicators:
 
@@ -15,10 +14,6 @@ Colors the missions as follows:
 * A subscribed faction is the victim of the mission.
 
 The subscription colors can be disabled and all colors can be customized.
-
-# Upgrade Note
-Version 2.0 will not retain the previous configuration changes.
-If the old config file format exists, it will be backed up with a .bak extension before being overwritten.
 
 # Configuration
 The configuration file is located at ```%UserProfile%\AppData\LocalLow\Magnum Scriptum Ltd\Quasimorph\QM_MissionExpirationHighlight.yaml``` .
@@ -36,6 +31,9 @@ Thanks!
 Source code is available on GitHub https://github.com/NBKRedSpy/QM-MissionExpirationHighlight
 
 # Change Log
+
+## 2.3.0
+* Converted to colored bar at bottom of mission.
 
 ## 2.2.1
 * Incorrect color Fix
