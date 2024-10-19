@@ -41,7 +41,27 @@ namespace QM_MissionExpirationHighlight
             foreach (SpaceStationPanel panel in SingletonMonoBehaviour<SpaceUI>.Instance.Hud.SpaceStationsWindow._panels)
             {
                 Image image = panel._visualWrapper.transform
-                    .Find("Conflict Image").GetComponent<Image>();
+                    .Find("Conflict Image")?.GetComponent<Image>();
+
+                if (image == null)
+                {
+
+                    //Previously tried to setup the prefab for the panel, but the game
+                    //  will create four new station chits when coming in and out of the game.
+                    //  Just moved it all to here.
+
+                    StationsRenderer.SetPanelObjects(panel.gameObject);
+
+                    image = panel._visualWrapper.transform
+                        .Find("Conflict Image")?.GetComponent<Image>();
+
+
+                    if (image == null)
+                    {
+                        Debug.LogError($"Unable to find the 'Conflict image' even after init attempt");
+                        continue;
+                    }
+                }
 
                 image.color = Color.clear;
 
@@ -93,5 +113,36 @@ namespace QM_MissionExpirationHighlight
 
             }
         }
+
+        private static void SetPanelObjects(GameObject parentGameObject)
+        {
+            //Canvas attempt
+            RectTransform parentRec = parentGameObject.GetComponent<RectTransform>();
+
+            GameObject subObject = new GameObject("Conflict Image");
+            subObject.AddComponent<Canvas>();
+            subObject.transform.SetParent(parentRec, worldPositionStays: false);
+
+            Image image = subObject.AddComponent<Image>();
+            //image.color = new Color(1.0F, 0.0F, .0F, .5F);
+
+            //ColorUtility.TryParseHtmlString("#E7700D", out Color color);
+            image.color = Color.clear;
+
+            RectTransform conflictTransform = subObject.GetComponent<RectTransform>();
+            //conflictTransform.sizeDelta = parentRec.sizeDelta;
+            //conflictTransform.sizeDelta = new Vector2(46, 16);
+
+            conflictTransform.sizeDelta = new Vector2(46, 2);
+
+            Vector2 anchorPoint = new Vector2(0, 0);
+            conflictTransform.anchorMin = anchorPoint;
+            conflictTransform.anchorMax = anchorPoint;
+            conflictTransform.pivot = anchorPoint;
+
+
+
+        }
+
     }
 }

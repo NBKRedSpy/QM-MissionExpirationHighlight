@@ -32,6 +32,11 @@ Source code is available on GitHub https://github.com/NBKRedSpy/QM-MissionExpira
 
 # Change Log
 
+## 2.3.1
+* Fixed Null Reference exception with the new image object in some cases.
+
+Thanks to Discord user Verro for reporting.
+
 ## 2.3.0
 * Converted to colored bar at bottom of mission.
 
