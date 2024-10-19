@@ -16,11 +16,10 @@ namespace QM_MissionExpirationHighlight
     public static class StationsRenderer
     {
         public static UnityColorConfig ColorConfig;
+        private static Color InitialImageColor = Color.magenta;
 
         public static void Modify(SpaceStationsWindow window, SpaceObjects spaceObjects = null, string spaceObjectId = null)
         {
-
-
             bool checkEta = spaceObjects != null 
                 && !string.IsNullOrEmpty(spaceObjectId) 
                 && (!spaceObjectId.Equals(window._travelMetadata.CurrentSpaceObject));
@@ -40,6 +39,18 @@ namespace QM_MissionExpirationHighlight
 
             foreach (SpaceStationPanel panel in SingletonMonoBehaviour<SpaceUI>.Instance.Hud.SpaceStationsWindow._panels)
             {
+                Image image = panel._visualWrapper.GetComponent<Image>();
+
+                //Get the default color to be able to reset the border colors on image reuse.
+                if (InitialImageColor == Color.magenta)
+                {
+                    InitialImageColor = image.color;
+                }
+
+                //Set to the default color incase there is an early exit.  
+                //  The game uses a cache to re-use previous station panels.
+                image.color = InitialImageColor;
+
                 if (panel._prevStatus == StationStatus.Peaceful)
                 {
                     continue;
@@ -52,8 +63,6 @@ namespace QM_MissionExpirationHighlight
                     continue;
                 }
 
-                Image image = panel._visualWrapper.GetComponent<Image>();
-                if (image == null) return;
 
                 if (checkEta && (mission.ExpireTime < eta))
                 {

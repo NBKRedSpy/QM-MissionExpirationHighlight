@@ -14,7 +14,7 @@ namespace QM_MissionExpirationHighlight
     /// When returning to the Space Hud when the Space Stations panel is recreated (was hidden)
     /// </summary>
     [HarmonyPatch(typeof(SpaceStationsWindow), nameof(SpaceStationsWindow.Initialize))]
-    public static class SpaceStatiosnWindow_Initialize_Patch
+    public static class SpaceStationsWindow_Initialize_Patch
     {
         public static void Postfix(SpaceStationsWindow __instance)
         {

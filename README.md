@@ -37,6 +37,10 @@ Source code is available on GitHub https://github.com/NBKRedSpy/QM-MissionExpira
 
 # Change Log
 
+## 2.2.1
+* Incorrect color Fix
+* Non primary colors are still difficult to see. 
+
 ## 2.2.0
 * Preliminary support for .8 as the previous version crashes in .8.  Needs color fixes.
 
