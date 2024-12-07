@@ -15,11 +15,21 @@ namespace QM_MissionExpirationHighlight
 {
     public static class Plugin
     {
+
+        public static ConfigDirectories ConfigDirectories = new ConfigDirectories();
+
         public static ModConfig ModConfig{ get; set; }
 
         [Hook(ModHookType.AfterBootstrap)]  
         public static void Awake(IModContext context)
         {
+            Directory.CreateDirectory(ConfigDirectories.AllModsConfigFolder);
+
+            ConfigDirectories = new ConfigDirectories("QM_MissionExpirationHighlight.yaml");
+            ConfigDirectories.UpgradeFile(ConfigDirectories.ConfigFileName);
+
+            Directory.CreateDirectory(ConfigDirectories.ModPersistenceFolder);
+
             LoadConfig();
             ModConfig.Init();
 
@@ -30,7 +40,7 @@ namespace QM_MissionExpirationHighlight
 
         private static void LoadConfig()
         {
-            string configPath = Path.Combine(Application.persistentDataPath, Assembly.GetExecutingAssembly().GetName().Name) + ".yaml";
+            string configPath = ConfigDirectories.ConfigPath;
 
 
             if (File.Exists(configPath))

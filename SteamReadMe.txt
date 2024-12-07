@@ -18,7 +18,7 @@ The subscription colors can be disabled and all colors can be customized.
 
 [h1]Configuration[/h1]
 
-The configuration file is located at [i]%UserProfile%\AppData\LocalLow\Magnum Scriptum Ltd\Quasimorph\QM_MissionExpirationHighlight.yaml[/i] .
+The configuration file is located at [i]%UserProfile%\AppData\LocalLow\Magnum Scriptum Ltd\Quasimorph_ModConfigs\QM_MissionExpirationHighlight.yaml[/i] .
 The file will be created the first time the game is run.
 
 The [i]ColorConfig[/i] members contain all of the colors used by the mod.
@@ -35,6 +35,11 @@ Thanks!
 Source code is available on GitHub https://github.com/NBKRedSpy/QM-MissionExpirationHighlight
 
 [h1]Change Log[/h1]
+
+[h2]2.4.0[/h2]
+[list]
+[*]Moved config file directory.
+[/list]
 
 [h2]2.3.1[/h2]
 [list]
