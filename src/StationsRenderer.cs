@@ -38,7 +38,7 @@ namespace QM_MissionExpirationHighlight
 
             HashSet<string> subscriptions = new HashSet<string>(window._factions.SubscribedFactions);
 
-            foreach (SpaceStationPanel panel in SingletonMonoBehaviour<SpaceUI>.Instance.Hud.SpaceStationsWindow._panels)
+            foreach (SpaceStationPanel panel in window._panels)
             {
                 Image image = panel._visualWrapper.transform
                     .Find("Conflict Image")?.GetComponent<Image>();

@@ -15,7 +15,7 @@ namespace QM_MissionExpirationHighlight
         public static void Postfix(FactionsScreen __instance)
         {
 
-            StationsRenderer.Modify(SingletonMonoBehaviour<SpaceUI>.Instance.Hud.SpaceStationsWindow);
+            StationsRenderer.Modify(__instance._spaceStationsWindow);
         }
     }
 }

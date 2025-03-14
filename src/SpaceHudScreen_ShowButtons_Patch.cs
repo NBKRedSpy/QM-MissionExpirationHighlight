@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace QM_MissionExpirationHighlight
 {
-    [HarmonyPatch(typeof(SpaceHudScreen), nameof(SpaceHudScreen.ShowButtons))]
+    [HarmonyPatch(typeof(SpaceHudScreen), nameof(SpaceHudScreen.OnEnable))]
     public static class SpaceHudScreen_ShowButtons_Patch
     {
 

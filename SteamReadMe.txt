@@ -2,6 +2,18 @@
 
 
 
+[h1]Important - This version of the mod is only for the opt in beta version of the game![/h1]
+
+This is a temporary version that supports the 0.8.6 beta, and not the current game's version.
+For the non beta version of the game, use the mod of the same name without the BETA suffix.
+
+The non beta version [i]must[/i] be uninstalled.
+When the 0.8.6 becomes the main version, this mod will be deleted.
+Note that the beta is expected to change many times before release.
+As such, this mod may break on each beta release.
+
+[h1]Docs[/h1]
+
 Adds the following indicators:
 
 Adds a "X (Y)" number to the planet list where X is the non expiring missions and Y is the total number of missions.
@@ -36,6 +48,11 @@ Source code is available on GitHub https://github.com/NBKRedSpy/QM-MissionExpira
 
 [h1]Change Log[/h1]
 
+[h2]2.5.0[/h2]
+[list]
+[*]Compatible with the 0.8.6 opt in beta
+[/list]
+
 [h2]2.4.0[/h2]
 [list]
 [*]Moved config file directory.
@@ -47,32 +64,3 @@ Source code is available on GitHub https://github.com/NBKRedSpy/QM-MissionExpira
 [/list]
 
 Thanks to Discord user Verro for reporting.
-
-[h2]2.3.0[/h2]
-[list]
-[*]Converted to colored bar at bottom of mission.
-[/list]
-
-[h2]2.2.1[/h2]
-[list]
-[*]Incorrect color Fix
-[*]Non primary colors are still difficult to see.
-[/list]
-
-[h2]2.2.0[/h2]
-[list]
-[*]Preliminary support for .8 as the previous version crashes in .8.  Needs color fixes.
-[/list]
-
-[h2]2.1.0[/h2]
-
-Fixes:
-[list]
-[*]Factions subscriptions screen not updating on change.
-[*]Not updating when returning to the main hud.
-[/list]
-
-[h2]2.0.0[/h2]
-
-Added faction subscription colors.
-Thanks to Steam user RafaelKB for the suggestion.
