@@ -9,7 +9,7 @@ using UnityEngine;
 
 namespace QM_MissionExpirationHighlight
 {
-    [HarmonyPatch(typeof(StarmapScreen), nameof(StarmapScreen.Show))]
+    [HarmonyPatch(typeof(StarmapScreen), nameof(StarmapScreen.OnEnable))]
     public static partial class StarmapScreen_Show_Patch
     {
 

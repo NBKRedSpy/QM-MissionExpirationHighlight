@@ -14,7 +14,7 @@ namespace QM_MissionExpirationHighlight
     {
         public static void Postfix(StarmapScreen __instance, StarmapSpaceObjectPanel obj)
         {
-            StationsRenderer.Modify(SingletonMonoBehaviour<SpaceUI>.Instance.Hud.SpaceStationsWindow, __instance._spaceObjects, obj.SpaceObjectId);
+            StationsRenderer.Modify(__instance._spaceStationsWindow, __instance._spaceObjects, obj.SpaceObjectId);
         }
     }
 }

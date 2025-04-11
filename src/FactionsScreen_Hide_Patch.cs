@@ -13,12 +13,12 @@ namespace QM_MissionExpirationHighlight
     /// <summary>
     /// When returning to the Space Hud when the Space Stations panel is recreated (was hidden)
     /// </summary>
-    [HarmonyPatch(typeof(FactionsScreen), nameof(FactionsScreen.Hide))]
+    [HarmonyPatch(typeof(FactionsScreen), nameof(FactionsScreen.HideAllWindows))]
     public static class FactionsScreen_Hide_Patch
     {
-        public static void Postfix()
+        public static void Postfix(FactionsScreen __instance)
         {
-            StationsRenderer.Modify(SingletonMonoBehaviour<SpaceUI>.Instance._spaceHudScreen.SpaceStationsWindow, null, null);
+            StationsRenderer.Modify(__instance._spaceStationsWindow, null, null);
         }
     }
 }
