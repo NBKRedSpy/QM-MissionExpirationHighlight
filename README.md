@@ -3,20 +3,6 @@
 ![Color Key](media/thumbnail.png)
 ![Planet Mission Count](media/PlanetList.png)
 
-
-# Important - This version of the mod is only for the opt in beta version of the game!
-
-This is a temporary version that supports the 0.8.6 beta, and not the current game's version.
-For the non beta version of the game, use the mod of the same name without the BETA suffix.
-
-The non beta version *must* be uninstalled.  
-When the 0.8.6 becomes the main version, this mod will be deleted.
-Note that the beta is expected to change many times before release.
-As such, this mod may break on each beta release.
-
-# Docs
-
-
 Adds the following indicators:
 
 Adds a "X (Y)" number to the planet list where X is the non expiring missions and Y is the total number of missions.
