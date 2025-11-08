@@ -1,0 +1,7 @@
+{
+    "UniqueModName": "MissionExpirationHighlight",
+    "Assemblies": [
+        "MissionExpirationHighlight_Bootstrap.dll"
+    ],
+    "Dependencies": []
+}
