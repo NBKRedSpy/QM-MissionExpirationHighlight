@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace QM_MissionExpirationHighlight
+namespace MissionExpirationHighlight
 {
 
 

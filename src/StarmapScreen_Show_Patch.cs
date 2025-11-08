@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
 
-namespace QM_MissionExpirationHighlight
+namespace MissionExpirationHighlight
 {
     [HarmonyPatch(typeof(StarmapScreen), nameof(StarmapScreen.OnEnable))]
     public static partial class StarmapScreen_Show_Patch

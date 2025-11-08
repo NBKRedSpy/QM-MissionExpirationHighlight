@@ -18,7 +18,7 @@ The subscription colors can be disabled and all colors can be customized.
 
 [h1]Configuration[/h1]
 
-The configuration file is located at [i]%UserProfile%\AppData\LocalLow\Magnum Scriptum Ltd\Quasimorph_ModConfigs\QM_MissionExpirationHighlight.yaml[/i] .
+The configuration file is located at [i]%UserProfile%\AppData\LocalLow\Magnum Scriptum Ltd\Quasimorph_ModConfigs\MissionExpirationHighlight.yaml[/i] .
 The file will be created the first time the game is run.
 
 The [i]ColorConfig[/i] members contain all of the colors used by the mod.

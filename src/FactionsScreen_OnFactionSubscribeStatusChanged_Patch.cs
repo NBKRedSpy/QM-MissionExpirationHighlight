@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
 
-namespace QM_MissionExpirationHighlight
+namespace MissionExpirationHighlight
 {
     [HarmonyPatch(typeof(FactionsScreen), nameof(FactionsScreen.OnFactionSubscribeStatusChanged))]
     public static class FactionsScreen_OnFactionSubscribeStatusChanged_Patch

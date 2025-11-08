@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using UnityEngine;
 using YamlDotNet.Serialization;
 
-namespace QM_MissionExpirationHighlight
+namespace MissionExpirationHighlight
 {
     public class ColorConfig
     {

@@ -1,6 +1,7 @@
 ﻿using BepInEx;
 using HarmonyLib;
 using MGSC;
+using MissionExpirationHighlight_Bootstrap;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -11,21 +12,21 @@ using System.Threading.Tasks;
 using UnityEngine;
 using YamlDotNet.Serialization;
 
-namespace QM_MissionExpirationHighlight
+namespace MissionExpirationHighlight
 {
-    public static class Plugin
+    public class Plugin : BootstrapMod
     {
 
         public static ConfigDirectories ConfigDirectories = new ConfigDirectories();
 
         public static ModConfig ModConfig{ get; set; }
 
-        [Hook(ModHookType.AfterBootstrap)]  
-        public static void Awake(IModContext context)
+
+        public Plugin(HookEvents hookEvents, bool isBeta) : base(hookEvents, isBeta)
         {
             Directory.CreateDirectory(ConfigDirectories.AllModsConfigFolder);
 
-            ConfigDirectories = new ConfigDirectories("QM_MissionExpirationHighlight.yaml");
+            ConfigDirectories = new ConfigDirectories("MissionExpirationHighlight.yaml");
             ConfigDirectories.UpgradeFile(ConfigDirectories.ConfigFileName);
 
             Directory.CreateDirectory(ConfigDirectories.ModPersistenceFolder);
@@ -35,7 +36,7 @@ namespace QM_MissionExpirationHighlight
 
             StationsRenderer.ColorConfig = ModConfig.UnityColorConfig;
 
-            new Harmony("QM_MissionExpirationHighlight").PatchAll();
+            new Harmony("MissionExpirationHighlight").PatchAll();
         }
 
         private static void LoadConfig()

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace QM_MissionExpirationHighlight
+namespace MissionExpirationHighlight
 {
     public enum MissionInfo
     {
