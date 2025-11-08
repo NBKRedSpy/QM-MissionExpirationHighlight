@@ -7,7 +7,7 @@ using UnityEngine;
 using YamlDotNet.Serialization;
 using YamlDotNet.Serialization.NodeTypeResolvers;
 
-namespace QM_MissionExpirationHighlight
+namespace MissionExpirationHighlight
 {
     public class ModConfig
     {

@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
 
-namespace QM_MissionExpirationHighlight
+namespace MissionExpirationHighlight
 {
     [HarmonyPatch(typeof(SpaceHudScreen), nameof(SpaceHudScreen.RefreshUIOnArrival))]
     public static class SpaceHudScreen_StationsWindow_Patch
