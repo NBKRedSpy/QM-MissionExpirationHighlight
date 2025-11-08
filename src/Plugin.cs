@@ -19,6 +19,7 @@ namespace QM_MissionExpirationHighlight
         public static ConfigDirectories ConfigDirectories = new ConfigDirectories();
 
         public static ModConfig ModConfig{ get; set; }
+        public static State State { get; private set; }
 
         [Hook(ModHookType.AfterBootstrap)]  
         public static void Awake(IModContext context)
@@ -30,6 +31,7 @@ namespace QM_MissionExpirationHighlight
 
             Directory.CreateDirectory(ConfigDirectories.ModPersistenceFolder);
 
+            State = context.State;
             LoadConfig();
             ModConfig.Init();
 

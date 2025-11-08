@@ -30,7 +30,7 @@ namespace QM_MissionExpirationHighlight
             if (checkEta)
             {
 
-                double travelHoursBetweenPoints = TravelSystem.GetTravelHoursBetweenPoints(
+                double travelHoursBetweenPoints = TravelSystem.GetTravelHoursBetweenPoints(Plugin.State.Get<TravelMetadata>(),
                     spaceObjects, window._travelMetadata.CurrentSpaceObject, spaceObjectId);
 
                 eta = window._spaceTime.Time.AddHours(travelHoursBetweenPoints);
