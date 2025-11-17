@@ -31,7 +31,7 @@ namespace MissionExpirationHighlight
                     //function call.  It seems to only affect the current location
 
 
-                    travelHoursBetweenPoints = TravelSystem.GetTravelHoursBetweenPoints(
+                    travelHoursBetweenPoints = TravelSystem.GetTravelHoursBetweenPoints(__instance._travelMetadata,
                         __instance._spaceObjects, __instance._travelMetadata.CurrentSpaceObject, panel.SpaceObjectId);
                 }
                 catch (Exception)

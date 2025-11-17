@@ -36,6 +36,16 @@ Source code is available on GitHub https://github.com/NBKRedSpy/QM-MissionExpira
 
 [h1]Change Log[/h1]
 
+[h2]2.6.1[/h2]
+[list]
+[*]0.9.8 Compatibility
+[/list]
+
+[h2]2.5.1[/h2]
+[list]
+[*]Multi version compatibility.
+[/list]
+
 [h2]2.5.0[/h2]
 [list]
 [*]Compatible with the 0.8.6 opt in beta

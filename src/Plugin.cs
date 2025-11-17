@@ -20,10 +20,17 @@ namespace MissionExpirationHighlight
         public static ConfigDirectories ConfigDirectories = new ConfigDirectories();
 
         public static ModConfig ModConfig{ get; set; }
+        public static State State { get; private set; }
 
 
         public Plugin(HookEvents hookEvents, bool isBeta) : base(hookEvents, isBeta)
         {
+            hookEvents.AfterConfigsLoaded += AfterConfig;
+        }
+
+        public static void AfterConfig(IModContext context)
+        {
+
             Directory.CreateDirectory(ConfigDirectories.AllModsConfigFolder);
 
             ConfigDirectories = new ConfigDirectories("MissionExpirationHighlight.yaml");
@@ -31,6 +38,7 @@ namespace MissionExpirationHighlight
 
             Directory.CreateDirectory(ConfigDirectories.ModPersistenceFolder);
 
+            State = context.State;
             LoadConfig();
             ModConfig.Init();
 
