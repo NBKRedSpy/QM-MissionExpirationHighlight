@@ -3,5 +3,9 @@
     "Assemblies": [
         "MissionExpirationHighlight_Bootstrap.dll"
     ],
-    "Dependencies": []
+    "Dependencies": [],
+    "SteamTags": [
+        "1.0",
+        "Quality of Life"
+    ]    
 }
